@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group([
+    'middleware' => ['auth'],
+    'as' => 'admin.',
+    'namespace' => 'Admin'
+], function() {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
