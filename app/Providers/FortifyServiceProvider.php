@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Domain\Users\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Hash;

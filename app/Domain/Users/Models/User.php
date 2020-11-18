@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Users\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domain\Orders\Models\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -36,10 +37,19 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property bool $is_admin
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Order[] $orders
+ * @property-read int|null $orders_count
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -69,5 +79,16 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
+
+    /**
+     * Get the orders for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
