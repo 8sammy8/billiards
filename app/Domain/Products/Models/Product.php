@@ -2,7 +2,7 @@
 
 namespace App\Domain\Products\Models;
 
-use App\Domain\CategoryProducts\Models\CategoryProduct;
+use App\Domain\Categories\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read CategoryProduct $category
+ * @property-read Category $category
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Query\Builder|Product onlyTrashed()
@@ -65,6 +65,6 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->belongsTo(CategoryProduct::class);
+        return $this->belongsTo(Category::class);
     }
 }

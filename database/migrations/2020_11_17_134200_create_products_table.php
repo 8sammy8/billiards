@@ -22,7 +22,8 @@ class CreateProductsTable extends Migration
             $table->integer('purchase_price')->unsigned()->default(0);
             $table->integer('remainder')->unsigned()->default(0);
             $table->boolean('status')->default(true);
-            $table->foreignId('category_product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
