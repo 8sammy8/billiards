@@ -26,6 +26,8 @@ Route::group([
     Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
         ->except('show')->names('hall-groups');
     Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
-        ->names('tables');
+        ->except('show')->names('tables');
+    Route::resource('/rates', \App\Http\Controllers\Admin\RateController::class)
+        ->except('show')->names('rates');
 });
 

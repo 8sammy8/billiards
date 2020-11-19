@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tables</h1>
+                    <h1>Rate edit</h1>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                         <div class="card-header">
                             <h3 class="card-title"></h3>
                         </div>
-                        @include('admin.tables._form')
+                        @include('admin.rates._form')
                     </div>
                 </div>
             </div>

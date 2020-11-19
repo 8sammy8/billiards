@@ -35,14 +35,14 @@ class Rate extends Model
     /**
      * @var string[]
      */
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     /**
      * @var string[]
      */
     protected $casts = [
-        'start_at' => 'datetime:H:i',
-        'end_at' => 'datetime:H:i',
+        'start_at' => 'timestamp:H:i',
+        'end_at' => 'timestamp:H:i',
         'created_at' => 'datetime:Y-m-d',
     ];
 
@@ -54,5 +54,27 @@ class Rate extends Model
     public function hallGroup()
     {
         return $this->belongsTo(HallGroup::class);
+    }
+
+    /**
+     * Get the rate's start time.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getStartAtAttribute(string $value):string
+    {
+        return substr($value, 0, 5);
+    }
+
+    /**
+     * Get the rate's end time.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getEndAtAttribute(string $value):string
+    {
+        return substr($value, 0, 5);
     }
 }

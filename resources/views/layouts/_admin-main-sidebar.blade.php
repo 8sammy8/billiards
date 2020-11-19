@@ -32,6 +32,12 @@
                         <p>Tables</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.rates.index') }}" class="nav-link @if(Route::is('admin.rates*')) active @endif">
+                        <i class="fas fa-percentage nav-icon"></i>
+                        <p>Rates</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

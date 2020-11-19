@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Domain\HallGroups\Models\HallGroup;
 use App\Domain\Tables\Models\Table;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TableRequest;
+use App\Domain\Tables\Requests\TableRequest;
 
 class TableController extends Controller
 {
@@ -61,7 +61,7 @@ class TableController extends Controller
     {
         $hallGroups = HallGroup::all();
 
-        return view('admin.tables.create', compact('table','hallGroups'));
+        return view('admin.tables.edit', compact('table','hallGroups'));
     }
 
     /**
