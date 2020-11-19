@@ -21,10 +21,16 @@
                      with font-awesome or any other icon font library -->
                 <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
                 <li class="nav-item">
-                <a href="{{ route('admin.hall-groups.index') }}" class="nav-link @if(Route::is('admin.hall-groups*')) active @endif">
-                    <i class="far fa-map nav-icon"></i>
-                    <p>Hall Groups</p>
-                </a>
+                    <a href="{{ route('admin.hall-groups.index') }}" class="nav-link @if(Route::is('admin.hall-groups*')) active @endif">
+                        <i class="far fa-map nav-icon"></i>
+                        <p>Hall Groups</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.tables.index') }}" class="nav-link @if(Route::is('admin.tables*')) active @endif">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Tables</p>
+                    </a>
                 </li>
 
             </ul>

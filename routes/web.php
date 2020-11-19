@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\HallGroupController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +21,11 @@ Route::group([
     'middleware' => ['auth'],
     'as' => 'admin.',
 ], function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-    Route::resource('/hall-groups', HallGroupController::class)->except('show')->names('hall-groups');
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        ->name('home');
+    Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
+        ->except('show')->names('hall-groups');
+    Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
+        ->names('tables');
 });
 

@@ -32,6 +32,9 @@ class Table extends Model
 {
     use SoftDeletes;
 
+    public const TABLE_STATUS_SHOW = TRUE;
+    public const TABLE_STATUS_HIDE = FALSE;
+
     /**
      * @var string[]
      */
