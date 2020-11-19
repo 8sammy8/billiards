@@ -23,11 +23,17 @@ Route::group([
 ], function() {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
         ->name('home');
+
+    Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class)
+        ->except('show')->names('categories');
+
+    /** Need admin middleware */
     Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
         ->except('show')->names('hall-groups');
     Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
         ->except('show')->names('tables');
     Route::resource('/rates', \App\Http\Controllers\Admin\RateController::class)
         ->except('show')->names('rates');
+    /** Need admin middleware end */
 });
 
