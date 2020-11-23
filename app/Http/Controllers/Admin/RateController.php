@@ -6,7 +6,6 @@ use App\Domain\HallGroups\Models\HallGroup;
 use App\Domain\Rates\Models\Rate;
 use App\Domain\Rates\Requests\RateRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class RateController extends Controller
 {

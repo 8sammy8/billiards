@@ -26,6 +26,12 @@
                         <p>Categories</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.products.index') }}" class="nav-link @if(Route::is('admin.products*')) active @endif">
+                        <i class="fas fa-archive nav-icon"></i>
+                        <p>Products</p>
+                    </a>
+                </li>
 
                 <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
                 <li class="nav-item">

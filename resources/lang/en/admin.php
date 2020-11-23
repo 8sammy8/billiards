@@ -11,5 +11,6 @@ return [
 
     'table_status' => '{0} Hide|{1} Show',
     'category_status' => '{0} Blocked|{1} Active',
+    'product_status' => '{0} Hide|{1} Show',
 
 ];

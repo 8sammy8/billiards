@@ -52,7 +52,7 @@ class Category extends Model
     ];
 
     /**
-     * Get the products for the category product.
+     * Get the products for the category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -26,6 +26,10 @@ Route::group([
 
     Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class)
         ->except('show')->names('categories');
+    Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class)
+        ->except('show')->names('products');
+    Route::post('/product/{id}/image-delete', [\App\Http\Controllers\Admin\ProductController::class, 'imageDelete'])
+        ->name('products.image.delete');
 
     /** Need admin middleware */
     Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
