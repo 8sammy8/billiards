@@ -8,6 +8,7 @@ use App\Domain\Orders\Models\OrderProduct;
 use App\Domain\Orders\Requests\StoreOrderProductRequest;
 use App\Domain\Products\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Services\ProductLoggerService;
 use Illuminate\Http\Request;
 
 class OrderProductController extends Controller
@@ -114,6 +115,9 @@ class OrderProductController extends Controller
 
         $orderProduct->return_status = OrderProduct::REFUNDED;
         $orderProduct->save();
+
+        $loggerService = new ProductLoggerService($orderProduct->product);
+        $loggerService->productRefund();
 
         return back()->with('success', 'Product is refunded!');
     }

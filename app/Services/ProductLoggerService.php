@@ -59,4 +59,18 @@ class ProductLoggerService
             . ' Product status: ' . trans_choice('admin.product_status', $this->product->status)
         );
     }
+
+    public function productRefund()
+    {
+        \Log::channel('products')->info(
+            'Product refunded ID: ' . $this->product->id
+            . ' Product name: ' . $this->product->name . '(' . $this->product->getOriginal('name') . ')'
+            . ' Product Code: ' . $this->product->code . '(' . $this->product->getOriginal('code') . ')'
+            . ' Product price: ' . $this->product->price . '(' . $this->product->getOriginal('price') . ')'
+            . ' Product purchase_price: ' . $this->product->purchase_price . '(' . $this->product->getOriginal('purchase_price') . ')'
+            . ' Product remainder: ' . $this->product->remainder . '(' . $this->product->getOriginal('remainder') . ')'
+            . ' Product status: ' . trans_choice('admin.product_status', $this->product->status)
+            . '(' . trans_choice('admin.product_status', $this->product->getOriginal('status'))  . ')'
+        );
+    }
 }
