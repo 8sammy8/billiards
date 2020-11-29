@@ -3,6 +3,7 @@
 namespace App\Domain\Rates\Models;
 
 use App\Domain\HallGroups\Models\HallGroup;
+use App\Domain\Orders\Models\OrderTable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -41,8 +42,8 @@ class Rate extends Model
      * @var string[]
      */
     protected $casts = [
-        'start_at' => 'timestamp:H:i',
-        'end_at' => 'timestamp:H:i',
+        'start_at' => 'datetime:H:i',
+        'end_at' => 'datetime:H:i',
         'created_at' => 'datetime:Y-m-d',
     ];
 
@@ -57,24 +58,12 @@ class Rate extends Model
     }
 
     /**
-     * Get the rate's start time.
+     * Get the order table that owns the rate.
      *
-     * @param  string  $value
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function getStartAtAttribute(string $value):string
+    public function orderTable()
     {
-        return substr($value, 0, 5);
-    }
-
-    /**
-     * Get the rate's end time.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getEndAtAttribute(string $value):string
-    {
-        return substr($value, 0, 5);
+        return $this->hasOne(OrderTable::class);
     }
 }

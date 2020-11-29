@@ -14,10 +14,16 @@ return [
     |
     */
 
+    'currency' => env('CURRENCY', 'UZS'),
+    
     'image' => [
         'product' => [
             'width' => 150,
             'height' => 100,
         ],
     ],
+
+    'order_table_limits' => [
+        'LIMIT_FREE' => 0, 'LIMIT_TIME' => 1, 'LIMIT_PRICE' => 2
+    ]
 ];

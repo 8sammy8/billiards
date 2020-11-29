@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Domain\HallGroups\Models\HallGroup;
 use App\Domain\Rates\Models\Rate;
 use App\Domain\Rates\Requests\RateRequest;
+use App\Domain\Rates\Services\RateService;
 use App\Http\Controllers\Controller;
 
 class RateController extends Controller
@@ -56,10 +57,16 @@ class RateController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Rate $rate
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param RateService $rateService
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function edit(Rate $rate)
+    public function edit(Rate $rate, RateService $rateService)
     {
+        $canChange = $rateService->canChange($rate);
+        if(!$canChange) {
+            return redirect()->route('admin.rates.index')
+                ->with('error', 'Can not change rate is busy now!');
+        }
         $hallGroups = HallGroup::all();
 
         return view('admin.rates.edit', compact('rate','hallGroups'));
@@ -70,10 +77,17 @@ class RateController extends Controller
      *
      * @param RateRequest $request
      * @param Rate $rate
+     * @param RateService $rateService
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(RateRequest $request, Rate $rate)
+    public function update(RateRequest $request, Rate $rate, RateService $rateService)
     {
+        $canChange = $rateService->canChange($rate);
+        if(!$canChange) {
+            return redirect()->route('admin.rates.index')
+                ->with('error', 'Can not change rate is busy now!');
+        }
+
         $rate->update($request->all());
 
         return redirect()->route('admin.rates.index')->with('success', 'Rate updated');
@@ -83,11 +97,18 @@ class RateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Rate $rate
+     * @param RateService $rateService
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Rate $rate)
+    public function destroy(Rate $rate, RateService $rateService)
     {
+        $canChange = $rateService->canChange($rate);
+        if(!$canChange) {
+            return redirect()->route('admin.rates.index')
+                ->with('error', 'Can not delete rate is busy now!');
+        }
+
         $rate->delete();
 
         return redirect()->route('admin.rates.index')->with('success', 'Rate deleted');

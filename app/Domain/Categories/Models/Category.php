@@ -3,6 +3,7 @@
 namespace App\Domain\Categories\Models;
 
 use App\Domain\Products\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Category withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Category withoutTrashed()
  * @mixin \Eloquent
+ * @method static Builder|Category active()
+ * @method static Builder|Category activeProducts()
  */
 class Category extends Model
 {
@@ -59,5 +62,29 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Get only active(opened) categories
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query):Builder
+    {
+        return $query->where(['status' => self::CATEGORY_STATUS_ACTIVE]);
+    }
+
+    /**
+     * Get only active(opened) products
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActiveProducts(Builder $query):Builder
+    {
+        return $query->with('products', function ($query) {
+            $query->active('active');
+        });
     }
 }

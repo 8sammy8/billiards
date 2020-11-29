@@ -24,6 +24,33 @@ Route::group([
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
         ->name('home');
 
+    /** Order tables */
+    Route::get('/order-tables', [\App\Http\Controllers\Admin\OrderTableController::class, 'index'])
+        ->name('order-tables.index');
+    Route::get('/order-tables/create/{id}', [\App\Http\Controllers\Admin\OrderTableController::class, 'create'])
+        ->name('order-tables.create');
+    Route::post('/order-tables/create/', [\App\Http\Controllers\Admin\OrderTableController::class, 'store'])
+        ->name('order-tables.store');
+    Route::get('/order-tables/show/{id}', [\App\Http\Controllers\Admin\OrderTableController::class, 'show'])
+        ->name('order-tables.show');
+    Route::get('/order-tables/checkout/{id}', [\App\Http\Controllers\Admin\OrderTableController::class, 'checkout'])
+        ->name('order-tables.checkout');
+
+    /** Order products */
+    Route::get('/order-products', [\App\Http\Controllers\Admin\OrderProductController::class, 'index'])
+        ->name('order-products.index');
+    Route::get('/order-products/create/{order_id?}', [\App\Http\Controllers\Admin\OrderProductController::class, 'create'])
+        ->name('order-products.create');
+    Route::get('/order-products/edit/{id}', [\App\Http\Controllers\Admin\OrderProductController::class, 'edit'])
+        ->name('order-products.edit');
+    Route::post('/order-products/store/', [\App\Http\Controllers\Admin\OrderProductController::class, 'store'])
+        ->name('order-products.store');
+    Route::get('/order-products/refund/{id}', [\App\Http\Controllers\Admin\OrderProductController::class, 'refund'])
+        ->name('order-products.refund');
+    Route::get('/order-products/checkout/{id}', [\App\Http\Controllers\Admin\OrderProductController::class, 'checkout'])
+        ->name('order-products.checkout');
+
+    /** Product categories and products */
     Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class)
         ->except('show')->names('categories');
     Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class)

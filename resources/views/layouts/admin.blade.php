@@ -98,15 +98,18 @@
 <script src="{{ asset('vendor/admin-lte/dist/js/adminlte.min.js') }}"></script>
 
 <script>
-    var timeNode = document.getElementById('time-node');
+    $(document).ready(function () {
+        var timeNode = document.getElementById('time-node');
 
-    function getCurrentTimeString() {
-        return new Date().toTimeString().replace(/ .*/, '');
-    }
-    setInterval(
-        () => timeNode.innerHTML = getCurrentTimeString(),
-        1000
-    );
+        function getCurrentTimeString() {
+            return new Date().toTimeString().replace(/ .*/, '');
+        }
+        setInterval(
+            () => timeNode.innerHTML = getCurrentTimeString(),
+            1000
+        );
+    })
+
 </script>
 
 @include('layouts._toastr')

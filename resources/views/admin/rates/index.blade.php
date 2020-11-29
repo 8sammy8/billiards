@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
+                                    <th>Price</th>
                                     <th>Start time</th>
                                     <th>End time</th>
                                     <th>Hall group</th>
@@ -45,8 +46,9 @@
                                     <tr>
                                         <td>{{ $rate->id }}</td>
                                         <td>{{ $rate->name }}</td>
-                                        <td>{{ $rate->start_at}}</td>
-                                        <td>{{ $rate->end_at }}</td>
+                                        <td>{{ money($rate->price) }}</td>
+                                        <td>{{ $rate->start_at->format('H:i') }}</td>
+                                        <td>{{ $rate->end_at->format('H:i') }}</td>
                                         <td>{{ $rate->hallGroup->name }}</td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="{{ route('admin.rates.edit', $rate) }}">

@@ -32,7 +32,7 @@
                     <select class="form-control" name="start_at">
                         @foreach(HI_time() as $time)
                             <option value="{{ $time }}"
-                                {{ isset($rate) && $rate->start_at === $time ? 'selected' : '' }}>{{ $time }}
+                                {{ isset($rate) && $rate->start_at->format('H:i')  === $time ? 'selected' : '' }}>{{ $time }}
                             </option>
                         @endforeach
                     </select>
@@ -45,7 +45,7 @@
                     <select class="form-control" name="end_at">
                         @foreach(HI_time() as $time)
                             <option value="{{ $time }}"
-                                {{ isset($rate) && $rate->end_at === $time ? 'selected' : '' }}>{{ $time }}
+                                {{ isset($rate) && $rate->end_at->format('H:i')  === $time ? 'selected' : '' }}>{{ $time }}
                             </option>
                         @endforeach
                     </select>

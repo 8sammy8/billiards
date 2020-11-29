@@ -3,6 +3,7 @@
 namespace App\Domain\Orders\Models;
 
 use App\Domain\Products\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -31,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderProduct extends Model
 {
+    public const REFUNDED = TRUE;
+    public const NOT_REFUNDED = FALSE;
     /**
      * @var string[]
      */
@@ -47,6 +50,18 @@ class OrderProduct extends Model
     protected $casts = [
         'return_status' => 'boolean',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('return_status', function (Builder $builder) {
+            $builder->where('return_status', self::NOT_REFUNDED);
+        });
+    }
 
     /**
      * Get the order that owns the ordered product

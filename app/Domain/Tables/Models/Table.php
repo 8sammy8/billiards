@@ -3,8 +3,10 @@
 namespace App\Domain\Tables\Models;
 
 use App\Domain\HallGroups\Models\HallGroup;
+use App\Domain\Rates\Models\Rate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Domain\Tables\Models\Table
@@ -60,5 +62,15 @@ class Table extends Model
     public function hallGroup()
     {
         return $this->belongsTo(HallGroup::class);
+    }
+
+    /**
+     * Get all of the rates for the table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function rates()
+    {
+        return $this->hasManyThrough(Rate::class, HallGroup::class, 'id','hall_group_id', 'hall_group_id');
     }
 }

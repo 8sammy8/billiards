@@ -15,3 +15,16 @@ if (! function_exists('HI_time')) {
         return $array;
     }
 }
+if (! function_exists('money')) {
+    /**
+     * Returns money format
+     * @param ?string|null $money
+     * @return string
+     */
+    function money(?string $money):string
+    {
+        return $money
+            ? number_format($money, 0, '', ' ') . ' ' . config('settings.currency')
+            : '';
+    }
+}

@@ -1,6 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link" id="time-node"></a>
+    <div class="text-center bg-red">
+        <span class="brand-link" id="time-node"></span>
+    </div>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -19,6 +21,20 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+                <li class="nav-header"><i class="nav-icon fas fa-folder-open"></i> ORDERS</li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.order-tables.index') }}" class="nav-link @if(Route::is('admin.order-tables*')) active @endif">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Order tables</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.order-products.index') }}" class="nav-link @if(Route::is('admin.order-products*')) active @endif">
+                        <i class="fas fa-glass-martini nav-icon"></i>
+                        <p>Order products</p>
+                    </a>
+                </li>
+
                 <li class="nav-header"><i class="nav-icon fas fa-boxes"></i> PRODUCTS</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.categories.index') }}" class="nav-link @if(Route::is('admin.categories*')) active @endif">

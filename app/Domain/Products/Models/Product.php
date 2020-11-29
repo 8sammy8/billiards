@@ -4,6 +4,7 @@ namespace App\Domain\Products\Models;
 
 use App\Domain\Categories\Models\Category;
 use App\Domain\Products\Observers\ProductObserver;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +46,7 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
  * @mixin \Eloquent
+ * @method static Builder|Product active()
  */
 class Product extends Model
 {
@@ -90,6 +92,17 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get only active(opened) products
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query):Builder
+    {
+        return $query->where(['status' => self::PRODUCT_STATUS_SHOW]);
     }
 
     /**+
