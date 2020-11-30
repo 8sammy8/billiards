@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Domain\Categories\Models\Category;
 use App\Domain\Orders\Models\Order;
 use App\Domain\Orders\Models\OrderProduct;
+use App\Domain\Orders\Repositories\OrderProductRepository;
 use App\Domain\Orders\Requests\StoreOrderProductRequest;
 use App\Domain\Products\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Services\ProductLoggerService;
-use Illuminate\Http\Request;
 
 class OrderProductController extends Controller
 {
+    /**
+     * @var OrderProductRepository
+     */
+    protected $productRepository;
+
+    /**
+     * OrderProductController constructor.
+     * @param OrderProductRepository $productRepository
+     */
+    public function __construct(OrderProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -30,13 +43,12 @@ class OrderProductController extends Controller
      */
     public function create(?int $order_id = null)
     {
-        if (request()->ajax()) {
-            $products = Product::active()->where('category_id', request()->category_id)->get();
+        if (request()->ajax() && request()->has('category_id')) {
+            $products = Product::active()->where('category_id', request()->has('category_id'))->get();
             return view('admin.order-products._order-products', compact('products'));
         }
 
-        $order = $order_id ? Order::active()->with('table')->findOrFail($order_id) : '';
-        $categories = Category::active()->activeProducts()->get();
+        list($order, $categories) = $this->productRepository->createList((int)$order_id);
 
         return view('admin.order-products.create', compact('categories', 'order'));
     }
@@ -49,40 +61,14 @@ class OrderProductController extends Controller
      */
     public function store(StoreOrderProductRequest $request)
     {
-        $products = Product::whereIn('id', array_column($request->get('products'), 'id'))
-            ->get()->keyBy('id');
+        list($products, $orderProducts) = $this->productRepository->fillOrderProducts($request);
 
-        foreach($request->get('products') as $item) {
-            $product = $products[$item['id']];
-            if($product && $product->remainder >= $item['quantity']){
-                $orderProduct = new OrderProduct();
+        if ($products && $orderProducts) {
 
-                $orderProduct->product_id = $product->id;
-                $orderProduct->quantity = $item['quantity'];
-                $orderProduct->amount = $item['quantity'] * $product->price;
-                $orderProduct->income = ($item['quantity'] * $product->price) - ($item['quantity'] * $product->purchase_price);
-
-                $orderProducts[] = $orderProduct;
-                $products[$item['id']]->remainder -= $item['quantity'];
-            }
-            unset($product);
-        }
-
-        if (isset($orderProducts) && !empty($orderProducts)) {
-             if($request->get('order_id')) {
-                 $order = Order::active()->findOrFail($request->get('order_id'));
-             }
-             else{
-                 $order = new Order();
-                 $order->user_id = auth()->id();
-                 $order->save();
-             }
-
+            $order = $this->productRepository->getOrderStore($request);
             $order->orderTable()->saveMany($orderProducts);
 
-            $products->each(function ($item) {
-                $item->save();
-            });
+            $this->productRepository->updateProductsQuantity($products);
         }
         $request->session()->flash('success', 'Products add to order');
 
@@ -102,19 +88,23 @@ class OrderProductController extends Controller
         return view('admin.order-products.edit', compact('order'));
     }
 
-
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function refund(int $id)
     {
         $orderProduct = OrderProduct::with('order', 'product')->findOrFail($id);
 
-        if($orderProduct->order === Order::ORDER_STATUS_CLOSED){
+        if($orderProduct->order->status === Order::ORDER_STATUS_CLOSED){
             return back()->with('error', 'Order is closed!');
         }
-        $orderProduct->product->remainder += $orderProduct->quantity;
-        $orderProduct->product->save();
 
         $orderProduct->return_status = OrderProduct::REFUNDED;
         $orderProduct->save();
+
+        $orderProduct->product->remainder += $orderProduct->quantity;
+        $this->productRepository->updateProductQuantity($orderProduct->product);
 
         $loggerService = new ProductLoggerService($orderProduct->product);
         $loggerService->productRefund();

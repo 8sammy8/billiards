@@ -3,11 +3,11 @@
 namespace App\Domain\Products\Models;
 
 use App\Domain\Categories\Models\Category;
-use App\Domain\Products\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use App\Domain\Products\Observers\ProductObserver;
 
 /**
  * App\Domain\Products\Models\Product
@@ -83,6 +83,15 @@ class Product extends Model
      * @var string
      */
     protected $imagePath = 'uploads/products/';
+
+    /**
+     * The "boot" method of the model.
+     * Register observer
+     */
+    public static function boot() {
+        parent::boot();
+        Product::observe(new ProductObserver());
+    }
 
     /**
      * Get the category that owns the product.
