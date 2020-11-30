@@ -58,13 +58,16 @@ Route::group([
     Route::post('/product/{id}/image-delete', [\App\Http\Controllers\Admin\ProductController::class, 'imageDelete'])
         ->name('products.image.delete');
 
-    /** Need admin middleware */
-    Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
-        ->except('show')->names('hall-groups');
-    Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
-        ->except('show')->names('tables');
-    Route::resource('/rates', \App\Http\Controllers\Admin\RateController::class)
-        ->except('show')->names('rates');
-    /** Need admin middleware end */
+    Route::group(['middleware' => ['checkAdmin'],
+        ], function() {
+        /** Need admin middleware */
+        Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
+            ->except('show')->names('hall-groups');
+        Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
+            ->except('show')->names('tables');
+        Route::resource('/rates', \App\Http\Controllers\Admin\RateController::class)
+            ->except('show')->names('rates');
+        /** Need admin middleware end */
+    });
 });
 

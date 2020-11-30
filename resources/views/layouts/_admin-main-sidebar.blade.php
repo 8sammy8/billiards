@@ -49,6 +49,7 @@
                     </a>
                 </li>
 
+                @if (auth()->user()->isAdmin())
                 <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.hall-groups.index') }}" class="nav-link @if(Route::is('admin.hall-groups*')) active @endif">
@@ -68,7 +69,7 @@
                         <p>Rates</p>
                     </a>
                 </li>
-
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
