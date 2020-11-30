@@ -29,6 +29,8 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Query\Builder|Table withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Table withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|Rate[] $rates
+ * @property-read int|null $rates_count
  */
 class Table extends Model
 {

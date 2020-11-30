@@ -39,6 +39,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $total_amount
  * @method static Builder|Order activeProducts()
  * @method static Builder|Order whereTotalAmount($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
+ * @property-read int|null $products_count
+ * @property-read Table|null $table
+ * @method static Builder|Order orderProductsWithProducts()
  */
 class Order extends Model
 {

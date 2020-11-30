@@ -10,6 +10,32 @@ use Illuminate\Database\Eloquent\Collection;
 class TableService
 {
     /**
+     * Get suitable table rates
+     *
+     * @param Collection $rates
+     * @return array|Collection|\Illuminate\Support\Collection
+     */
+    public function getTableRates(Collection $rates)
+    {
+        $tableRates = [];
+
+        if($rates && $rates->count()){
+            $tableRates = $rates->map(function($rate) {
+                $now = now();
+                $start = $rate->start_at;
+                $end = $rate->end_at;
+
+                if($start == $end){
+                    $end->addDay();
+                }
+                if($start->lte($now) && $end->gte($now)){
+                    return $rate;
+                }
+            });
+        }
+        return $tableRates;
+    }
+    /**
      * Get table button css class for creating or showing an order
      *
      * @param Table $table
@@ -49,11 +75,13 @@ class TableService
     }
 
     /**
+     * Get time ends for play other than unlimited time
+     *
      * @param Table $table
-     * @param ?Collection $orders
+     * @param Collection $orders
      * @return \Illuminate\Support\Carbon|mixed|null
      */
-    public function getEndTime(Table $table, ?Collection $orders)
+    public function getEndTime(Table $table, Collection $orders)
     {
         /** @var Order $order */
         $order = $orders->where('orderTable.table_id', $table->id)->first();
@@ -65,6 +93,14 @@ class TableService
         }
     }
 
+    /**
+     * Get the difference as a CarbonInterval instance.
+     *
+     * @param Order $order
+     * @param false $end_at
+     * @param false $force
+     * @return \Carbon\CarbonInterval
+     */
     public function getTimeDiffCarbon(Order $order, $end_at = false, $force = false)
     {
         if (!$order->orderTable->limit == config('settings.order_table_limits.LIMIT_FREE') || $force) {
@@ -73,6 +109,12 @@ class TableService
         }
     }
 
+    /**
+     * Get time limit in 00:00 format
+     *
+     * @param Order $order
+     * @return string|null
+     */
     public function getTimeLimit(Order $order)
     {
         $diff = $this->getTimeDiffCarbon($order);
@@ -80,11 +122,23 @@ class TableService
         return $diff ? $this->addZero($diff->hours) . ":" . $this->addZero($diff->minutes) : null;
     }
 
+    /**
+     * Add 0 if less than 10
+     *
+     * @param int $number
+     * @return string
+     */
     public function addZero(int $number):string
     {
         return $number < 10 ? '0'. $number : $number;
     }
 
+    /**
+     * Round off the price in hundredths to 500
+     *
+     * @param $amount
+     * @return float|int
+     */
     public function moneyRound($amount)
     {
         return (int)round(abs($amount) / 500, 0, PHP_ROUND_HALF_UP) * 500;
