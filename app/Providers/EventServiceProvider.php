@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Providers;
-
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use App\Domain\Orders\Events\OrderProductRefundEvent;
+use App\Domain\Orders\Listeners\ProductRefundLoggerListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        OrderProductRefundEvent::class => [
+            ProductRefundLoggerListener::class,
         ],
     ];
 
