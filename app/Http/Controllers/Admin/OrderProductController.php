@@ -47,7 +47,7 @@ class OrderProductController extends Controller
     public function create(?int $order_id = null)
     {
         if (request()->ajax() && request()->has('category_id')) {
-            $products = Product::active()->where('category_id', request()->has('category_id'))->get();
+            $products = Product::active()->where('category_id', request()->get('category_id'))->get();
             return view('admin.order-products._order-products', compact('products'));
         }
 
@@ -130,6 +130,8 @@ class OrderProductController extends Controller
         $order->status = Order::ORDER_STATUS_CLOSED;
         $order->save();
 
-        return redirect()->route('admin.order-products.index')->with('success', 'Order closed');
+        return redirect()->route('admin.order-products.index')
+            ->with('success', 'Order closed')
+            ->with('print', route('admin.order.print', $order->id));
     }
 }
