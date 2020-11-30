@@ -114,6 +114,16 @@
 
 @include('layouts._toastr')
 
+@if(session('print'))
+    <script>
+        $(document).ready(function () {
+            setTimeout(() => {
+                window.open("{{ session('print') }}", "_blank");
+            }, 2000);
+        })
+    </script>
+@endif
+
 @stack('scripts')
 </body>
 </html>

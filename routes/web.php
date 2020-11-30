@@ -50,6 +50,9 @@ Route::group([
     Route::get('/order-products/checkout/{id}', [\App\Http\Controllers\Admin\OrderProductController::class, 'checkout'])
         ->name('order-products.checkout');
 
+    Route::get('/order/print/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'print'])
+        ->name('order.print');
+
     /** Product categories and products */
     Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class)
         ->except('show')->names('categories');
@@ -60,14 +63,17 @@ Route::group([
 
     Route::group(['middleware' => ['checkAdmin'],
         ], function() {
-        /** Need admin middleware */
+        Route::resource('/reports/order-table', \App\Http\Controllers\Admin\ReportTableController::class)
+            ->names('reports-table');
+        Route::resource('/reports/order-products', \App\Http\Controllers\Admin\ReportProductController::class)
+            ->names('reports-products');
+
         Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
             ->except('show')->names('hall-groups');
         Route::resource('/tables', \App\Http\Controllers\Admin\TableController::class)
             ->except('show')->names('tables');
         Route::resource('/rates', \App\Http\Controllers\Admin\RateController::class)
             ->except('show')->names('rates');
-        /** Need admin middleware end */
     });
 });
 
