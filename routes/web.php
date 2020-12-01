@@ -61,12 +61,18 @@ Route::group([
     Route::post('/product/{id}/image-delete', [\App\Http\Controllers\Admin\ProductController::class, 'imageDelete'])
         ->name('products.image.delete');
 
+    Route::get('/reports/order-table', [\App\Http\Controllers\Admin\ReportTableController::class, 'index'])
+        ->name('reports-table.index');
+
+    Route::get('/reports/order-product', [\App\Http\Controllers\Admin\ReportProductController::class, 'index'])
+        ->name('reports-product.index');
+
     Route::group(['middleware' => ['checkAdmin'],
         ], function() {
-        Route::resource('/reports/order-table', \App\Http\Controllers\Admin\ReportTableController::class)
-            ->names('reports-table');
-        Route::resource('/reports/order-products', \App\Http\Controllers\Admin\ReportProductController::class)
-            ->names('reports-products');
+        Route::get('/reports/order-table/pass/{user_id}', [\App\Http\Controllers\Admin\ReportTableController::class, 'pass'])
+            ->name('reports-table.pass');
+        Route::get('/reports/order-product/pass/{user_id}', [\App\Http\Controllers\Admin\ReportProductController::class, 'pass'])
+            ->name('reports-product.pass');
 
         Route::resource('/hall-groups', \App\Http\Controllers\Admin\HallGroupController::class)
             ->except('show')->names('hall-groups');

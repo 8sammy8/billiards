@@ -44,6 +44,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read Table|null $table
  * @method static Builder|Order orderProductsWithProducts()
  * @method static Builder|Order closed()
+ * @method static Builder|Order notReceipted()
+ * @method static Builder|Order receipted()
+ * @method static Builder|Order orderTableWithTable()
  */
 class Order extends Model
 {
@@ -126,6 +129,29 @@ class Order extends Model
     }
 
     /**
+     * Get only receipted orders
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeReceipted(Builder $query):Builder
+    {
+        return $query->where(['cashbox' => self::CASHBOX_CLOSED]);
+    }
+
+    /**
+     * Get only receipted orders
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeNotReceipted(Builder $query):Builder
+    {
+        return $query->where(['cashbox' => self::CASHBOX_OPEN]);
+    }
+
+
+    /**
      * Get with active(opened) ordered tables
      *
      * @return Builder
@@ -173,5 +199,15 @@ class Order extends Model
     public function scopeOrderProductsWithProducts():Builder
     {
         return $this->with('orderProducts')->with('products');
+    }
+
+    /**
+     * Get with active(opened) ordered products
+     *
+     * @return Builder
+     */
+    public function scopeOrderTableWithTable():Builder
+    {
+        return $this->with('orderTable')->with('table');
     }
 }

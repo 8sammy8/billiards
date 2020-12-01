@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <div class="text-center bg-red">
-        <span class="brand-link" id="time-node"></span>
+        <span class="brand-link pl-0" id="time-node"></span>
     </div>
 
     <!-- Sidebar -->
@@ -49,8 +49,6 @@
                     </a>
                 </li>
 
-                @if (auth()->user()->isAdmin())
-
                 <li class="nav-header"><i class="nav-icon fas fa-reply"></i> ORDERS REPORTS</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.reports-table.index') }}" class="nav-link @if(Route::is('admin.reports-table.*')) active @endif">
@@ -59,11 +57,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.reports-products.index') }}" class="nav-link @if(Route::is('admin.reports-products*')) active @endif">
+                    <a href="{{ route('admin.reports-product.index') }}" class="nav-link @if(Route::is('admin.reports-product*')) active @endif">
                         <i class="fas fa-glass-martini nav-icon"></i>
                         <p>Product reports</p>
                     </a>
                 </li>
+
+                @if (auth()->user()->isAdmin())
 
                 <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
                 <li class="nav-item">

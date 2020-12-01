@@ -112,6 +112,8 @@ class OrderTableController extends Controller
 
         $order->save();
 
-        return redirect()->route('admin.order-tables.index')->with('Order closed');
+        return redirect()->route('admin.order-tables.index')
+            ->with('success', 'Order table closed')
+            ->with('print', route('admin.order.print', $order->id));
     }
 }
