@@ -43,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read int|null $products_count
  * @property-read Table|null $table
  * @method static Builder|Order orderProductsWithProducts()
+ * @method static Builder|Order closed()
  */
 class Order extends Model
 {
@@ -111,6 +112,17 @@ class Order extends Model
     public function scopeActive(Builder $query):Builder
     {
         return $query->where(['status' => self::ORDER_STATUS_OPEN]);
+    }
+
+    /**
+     * Get only closed orders
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeClosed(Builder $query):Builder
+    {
+        return $query->where(['status' => self::ORDER_STATUS_CLOSED]);
     }
 
     /**

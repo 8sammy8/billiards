@@ -50,6 +50,21 @@
                 </li>
 
                 @if (auth()->user()->isAdmin())
+
+                <li class="nav-header"><i class="nav-icon fas fa-reply"></i> ORDERS REPORTS</li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.reports-table.index') }}" class="nav-link @if(Route::is('admin.reports-table.*')) active @endif">
+                        <i class="fas fa-table nav-icon"></i>
+                        <p>Table reports</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.reports-products.index') }}" class="nav-link @if(Route::is('admin.reports-products*')) active @endif">
+                        <i class="fas fa-glass-martini nav-icon"></i>
+                        <p>Product reports</p>
+                    </a>
+                </li>
+
                 <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.hall-groups.index') }}" class="nav-link @if(Route::is('admin.hall-groups*')) active @endif">
