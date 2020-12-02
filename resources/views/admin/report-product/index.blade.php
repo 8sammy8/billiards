@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Product reports</h1>
+                    <h1>@lang('admin.product_reports')</h1>
                 </div>
             </div>
         </div>
@@ -32,14 +32,14 @@
                                                role="grid" aria-describedby="example1_info">
                                             <thead>
                                                 <tr role="row">
-                                                    <th>Date</th>
-                                                    <th>Order Id</th>
-                                                    <th width="15%">Products</th>
+                                                    <th>@lang('admin.date')</th>
+                                                    <th>@lang('admin.order_id')</th>
+                                                    <th width="15%">@lang('admin.products')</th>
                                                     @if (auth()->user()->isAdmin())
-                                                        <th>Products income</th>
+                                                        <th>@lang('admin.products_income')</th>
                                                     @endif
-                                                    <th>Price</th>
-                                                    <th>Actions</th>
+                                                    <th>@lang('admin.products_price')</th>
+                                                    <th>@lang('admin.action')</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -55,7 +55,7 @@
                                                     <td>
                                                         <a class="btn btn-warning btn-sm" href="{{ route('admin.order.print', $order->id) }}" target="_blank">
                                                             <i class="fas fa-print"></i>
-                                                            Print
+                                                            @lang('admin.print')
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -75,7 +75,7 @@
                 <div class="col-6">
                     <div class="table-responsive">
                         <table class="table">
-                                <th>Total: {{ money($operatorOrders->sum('total_amount')) }}</th>
+                                <th>@lang('admin.total'): {{ money($operatorOrders->sum('total_amount')) }}</th>
                             </tr>
                         </table>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="col-12">
                         <a href="{{ route('admin.reports-table.pass', $operatorOrders->first()->user_id) }}">
                             <button type="button" class="btn btn-danger float-left">
-                                <i class="far fa-credit-card"></i> Pass of
+                                <i class="far fa-credit-card"></i> @lang('admin.pass_of')
                             </button>
                         </a>
                     </div>

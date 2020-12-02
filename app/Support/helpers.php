@@ -18,13 +18,15 @@ if (! function_exists('HI_time')) {
 if (! function_exists('money')) {
     /**
      * Returns money format
+     *
      * @param ?string|null $money
+     * @param string $currency
      * @return string
      */
-    function money(?string $money):string
+    function money(?string $money, string $currency = ''):string
     {
         return $money
-            ? number_format($money, 0, '', ' ') . ' ' . config('settings.currency')
+            ? number_format($money, 0, '', ' ') . ' ' . ($currency ? $currency : config('settings.currency'))
             : '';
     }
 }

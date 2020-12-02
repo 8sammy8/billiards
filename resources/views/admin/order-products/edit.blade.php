@@ -43,7 +43,7 @@
                                             <td>{{ money($orderProduct->amount) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.order-products.refund', $orderProduct->id) }}"
-                                                onclick="confirm('Are you sure to refund the product?')">
+                                                onclick="if(!confirm('{{ trans('admin.sure_to_refund_product') }}')){ return false;}">
                                                     <button class="btn btn-warning">
                                                         <i class="fas fa-backward"></i>
                                                         Refund

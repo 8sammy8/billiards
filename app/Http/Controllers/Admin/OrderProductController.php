@@ -47,7 +47,7 @@ class OrderProductController extends Controller
     public function create(?int $order_id = null)
     {
         if (request()->ajax() && request()->has('category_id')) {
-            $products = Product::active()->where('category_id', request()->get('category_id'))->get();
+            $products = Product::active()->where('category_id', (int)request()->get('category_id'))->get();
             return view('admin.order-products._order-products', compact('products'));
         }
 
@@ -73,7 +73,7 @@ class OrderProductController extends Controller
 
             $this->productRepository->updateProductsQuantity($products);
         }
-        $request->session()->flash('success', 'Products add to order');
+        $request->session()->flash('success', trans('admin.product_added_to_order'));
 
         return response()->noContent();
     }
@@ -102,7 +102,7 @@ class OrderProductController extends Controller
         $orderProduct = OrderProduct::with('order', 'product')->findOrFail($id);
 
         if($orderProduct->order->status === Order::ORDER_STATUS_CLOSED){
-            return back()->with('error', 'Order is closed!');
+            return back()->with('error', trans('admin.order_already_closed'));
         }
 
         $orderProduct->return_status = OrderProduct::REFUNDED;
@@ -113,7 +113,7 @@ class OrderProductController extends Controller
 
         event(new OrderProductRefundEvent($orderProduct));
 
-        return back()->with('success', 'Product is refunded!');
+        return back()->with('success', trans('admin.product_refunded'));
     }
 
 
@@ -131,7 +131,7 @@ class OrderProductController extends Controller
         $order->save();
 
         return redirect()->route('admin.order-products.index')
-            ->with('success', 'Order closed')
+            ->with('success', trans('admin.order_closed'))
             ->with('print', route('admin.order.print', $order->id));
     }
 }

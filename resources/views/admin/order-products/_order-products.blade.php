@@ -21,7 +21,7 @@
                         data-product-img="{{ $product->img ? asset($product->img) : '' }}"
                 >
                     <i class="fas fa-plus"></i>
-                    Add
+                    @lang('admin.add')
                 </button>
             </td>
         </tr>

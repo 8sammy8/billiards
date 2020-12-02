@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> {{ isset($order->table) ? 'Add product to ' . $order->table->name : 'Create order' }}</h1>
+                    <h1> {{ isset($order->table) ? (trans('admin.add_product_to') . $order->table->name) : trans('admin.add') }}</h1>
                 </div>
             </div>
         </div>
@@ -17,14 +17,14 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Products</h3>
+                            <h3 class="card-title">@lang('admin.products')</h3>
                         </div>
                         <div class="card-body">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label>Choose product category</label>
+                                    <label>@lang('admin.categories')</label>
                                     <select class="form-control" name="category_id" id="category">
-                                        <option value="" selected>Select</option>
+                                        <option value="" selected> @lang('admin.select')</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
                                                 {{ isset($product->category_id) && ($product->category_id === $category->id ) ? 'selected' : '' }}
@@ -39,12 +39,12 @@
                             <table class="table table-bordered table-hover text-center">
                                 <thead>
                                 <tr>
-                                    <th>Product code</th>
-                                    <th>Product name</th>
-                                    <th>Image</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
+                                    <th>@lang('admin.code')</th>
+                                    <th>@lang('admin.product_name')</th>
+                                    <th>@lang('admin.image')</th>
+                                    <th>@lang('admin.quantity')</th>
+                                    <th>@lang('admin.price')</th>
+                                    <th>@lang('admin.action')</th>
                                 </tr>
                                 </thead>
                                 <tbody id="products-body">
@@ -64,7 +64,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Cart</h3>
+                            <h3 class="card-title">@lang('admin.cart')</h3>
                         </div>
                             @include('admin.order-products._form')
                     </div>
@@ -78,6 +78,7 @@
     <script src="{{ asset('money.js') }}"></script>
     <script>
         $(document).ready(function () {
+            var btn_remove = '{{ trans('admin.remove') }}';
             var products_body = $('#products-body');
             var cart_body = $('#cart-body');
             var cart_products = [];
@@ -131,7 +132,7 @@
                     "                        data-product-quantity=\""+ e_select_val +"\"\n" +
                     "                >\n" +
                     "                    <i class=\"fas fa-minus\"></i>\n" +
-                    "                    Remove \n" +
+                    "                     "+ btn_remove +" \n" +
                     "                </button>\n" +
                     "            </td>\n" +
                     "        </tr>";
@@ -183,7 +184,7 @@
 
             $('#checkout').click(function () {
                 if(cart_products.length === 0) {
-                    return toastr.error('Please add product to cart!')
+                    return toastr.error('{{ trans('admin.add_product_to_cart') }}')
                 }
 
                 var order_id = '{{ $order->id ?? '' }}';

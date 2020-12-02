@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add product</h1>
+                    <h1>@lang('admin.create_product')</h1>
                 </div>
             </div>
         </div>

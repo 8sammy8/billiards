@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Rates</h1>
+                    <h1>@lang('admin.rates')</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -22,7 +22,7 @@
                                 <a href="{{ route('admin.rates.create') }}">
                                     <button type="button" class="btn btn-block btn-primary btn-sm">
                                         <i class="fas fa-plus"></i>
-                                        Create
+                                        @lang('admin.create')
                                     </button>
                                 </a>
                             </h3>
@@ -32,13 +32,13 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Start time</th>
-                                    <th>End time</th>
-                                    <th>Hall group</th>
-                                    <th>Actions</th>
+                                    <th>@lang('admin.id')</th>
+                                    <th>@lang('admin.name')</th>
+                                    <th>@lang('admin.price')</th>
+                                    <th>@lang('admin.start_time')</th>
+                                    <th>@lang('admin.end_time')</th>
+                                    <th>@lang('admin.hall_group')</th>
+                                    <th>@lang('admin.action')</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,13 +54,13 @@
                                             <a class="btn btn-info btn-sm" href="{{ route('admin.rates.edit', $rate) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
-                                                Edit
+                                                @lang('admin.edit')
                                             </a>
                                             <a class="btn btn-danger btn-sm" href="{{ route('admin.rates.destroy', $rate) }}"
                                                onclick="event.preventDefault(); document.getElementById('delete-form{{ $rate->id }}').submit();">
                                                 <i class="fas fa-trash">
                                                 </i>
-                                                Delete
+                                                @lang('admin.delete')
                                             </a>
                                             <form id="delete-form{{ $rate->id }}" action="{{ route('admin.rates.destroy', $rate) }}" method="POST">
                                                 @csrf

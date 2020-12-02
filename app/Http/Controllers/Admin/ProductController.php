@@ -59,7 +59,7 @@ class ProductController extends Controller
         $categories = Category::all();
         if($categories->isEmpty()) {
             return redirect()->route('admin.categories.create')
-                ->with('info', 'Please, First create Category');
+                ->with('info', trans('admin.first_create_category'));
         }
 
         return view('admin.products.create', compact('categories'));
@@ -81,7 +81,7 @@ class ProductController extends Controller
 
         $this->fill($request, $product)->save();
 
-        return redirect()->route('admin.products.index')->with('success', 'Product added');
+        return redirect()->route('admin.products.index')->with('success', trans('admin.product_added'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ProductController extends Controller
 
         $this->fill($request, $product)->update();
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated');
+        return redirect()->route('admin.products.index')->with('success', trans('admin.product_updated'));
     }
 
     /**
@@ -132,7 +132,7 @@ class ProductController extends Controller
         }
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted');
+        return redirect()->route('admin.products.index')->with('success', trans('admin.product_deleted'));
     }
 
     /**

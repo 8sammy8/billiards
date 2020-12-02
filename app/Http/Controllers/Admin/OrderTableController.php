@@ -60,7 +60,7 @@ class OrderTableController extends Controller
         $orderOpened = $this->repository->getOrderOpened((int)$request->get('table_id'));
         if ($orderOpened) {
             return redirect()->route('admin.order-tables.index')
-                ->with('warning', 'The time is already open!');
+                ->with('warning', trans('admin.time_already_opened'));
         }
 
         $orderTable = $this->repository->fillOrderTableStore($request);
@@ -72,7 +72,7 @@ class OrderTableController extends Controller
         $order->orderTable()->save($orderTable);
 
         return redirect()->route('admin.order-tables.index')
-            ->with('success', 'Open time');
+            ->with('success', trans('admin.time_opened'));
     }
 
     /**
@@ -100,7 +100,7 @@ class OrderTableController extends Controller
 
         if ($order->status == Order::ORDER_STATUS_CLOSED) {
             return redirect()->route('admin.order-tables.index')
-                ->with('error', 'Order is already closed!');
+                ->with('error', trans('admin.order_already_closed'));
         }
 
         $amount = $order->orderTable->limit === OrderTable::LIMIT_FREE
@@ -113,7 +113,7 @@ class OrderTableController extends Controller
         $order->save();
 
         return redirect()->route('admin.order-tables.index')
-            ->with('success', 'Order table closed')
+            ->with('success', trans('admin.order_table_closed'))
             ->with('print', route('admin.order.print', $order->id));
     }
 }

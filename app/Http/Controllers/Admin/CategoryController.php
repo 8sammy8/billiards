@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
         $this->fill($request, $category)->save();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category created');
+        return redirect()->route('admin.categories.index')->with('success', trans('admin.category_created'));
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     {
         $this->fill($request, $category)->update();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category updated');
+        return redirect()->route('admin.categories.index')->with('success', trans('admin.category_updated'));
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted');
+        return redirect()->route('admin.categories.index')->with('success', trans('admin.category_deleted'));
     }
 
     /**

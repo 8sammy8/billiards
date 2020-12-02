@@ -2,12 +2,12 @@
     <table class="table table-bordered table-hover text-center">
         <thead>
         <tr>
-            <th>Product code</th>
-            <th>Product name</th>
-            <th>Image</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Actions</th>
+            <th>@lang('admin.code')</th>
+            <th>@lang('admin.product_name')</th>
+            <th>@lang('admin.image')</th>
+            <th>@lang('admin.quantity')</th>
+            <th>@lang('admin.price')</th>
+            <th>@lang('admin.action')</th>
         </tr>
         </thead>
         <tbody id="cart-body">
@@ -17,5 +17,5 @@
 </div>
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary" id="checkout">Checkout</button>
+    <button type="submit" class="btn btn-primary" id="checkout">@lang('admin.add')</button>
 </div>

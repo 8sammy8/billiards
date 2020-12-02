@@ -15,7 +15,7 @@ return [
     */
 
     'currency' => env('CURRENCY', 'UZS'),
-    
+
     'image' => [
         'product' => [
             'width' => 150,
@@ -25,5 +25,20 @@ return [
 
     'order_table_limits' => [
         'LIMIT_FREE' => 0, 'LIMIT_TIME' => 1, 'LIMIT_PRICE' => 2
+    ],
+
+    'print' => [
+        'bill' => 'Hisob',
+        'cost_1_hour' => '1 soatlik o\'yin narxi',
+        'game_start_time' => 'O\'yinning boshlanish vaqti',
+        'game_end_time' => 'O\'yin tugash vaqti',
+        'bar' => 'Bar',
+        'name' => 'Nomi',
+        'amount' => 'Miqdori',
+        'total' => 'Jami',
+        'amount_bar' => '',
+        'bar_amount' => 'Bar tol\'vi',
+        'billiards_amount' => 'Bilyard tol\'vi',
+        'total_amount' => 'To\'lov miqdori',
     ]
 ];

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Products</h1>
+                    <h1>@lang('admin.products')</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,7 +26,7 @@
                                 <a href="{{ route('admin.products.create') }}">
                                     <button type="button" class="btn btn-block btn-primary btn-sm">
                                         <i class="fas fa-plus"></i>
-                                        Create
+                                        @lang('admin.create')
                                     </button>
                                 </a>
                             </h3>
@@ -44,17 +44,17 @@
                                                role="grid" aria-describedby="example1_info">
                                             <thead>
                                                 <tr role="row">
-                                                    <th>Id</th>
-                                                    <th>Category</th>
-                                                    <th>Name</th>
-                                                    <th>Code</th>
-                                                    <th>Price</th>
-                                                    <th>Purchase price</th>
-                                                    <th>Remainder</th>
-                                                    <th>Status</th>
-                                                    <th>Image</th>
-                                                    <th>Updated time</th>
-                                                    <th>Actions</th>
+                                                    <th>@lang('admin.id')</th>
+                                                    <th>@lang('admin.category')</th>
+                                                    <th>@lang('admin.name')</th>
+                                                    <th>@lang('admin.code')</th>
+                                                    <th>@lang('admin.price')</th>
+                                                    <th>@lang('admin.purchase_price')</th>
+                                                    <th>@lang('admin.remainder')</th>
+                                                    <th>@lang('admin.status')</th>
+                                                    <th>@lang('admin.image')</th>
+                                                    <th>@lang('admin.updated_time')</th>
+                                                    <th>@lang('admin.action')</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

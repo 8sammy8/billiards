@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>All product orders</h1>
+                    <h1>@lang('admin.order_products')</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                                 <a href="{{ route('admin.order-products.create') }}">
                                     <button type="button" class="btn btn-block btn-primary btn-sm">
                                         <i class="fas fa-plus"></i>
-                                        Create
+                                        @lang('admin.add')
                                     </button>
                                 </a>
                             </h3>
@@ -31,11 +31,11 @@
                             <table id="example2" class="table table-bordered table-hover text-center">
                                 <thead>
                                 <tr>
-                                    <th>Order Id</th>
-                                    <th>Products name</th>
-                                    <th>Status</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
+                                    <th>@lang('admin.order_id')</th>
+                                    <th>@lang('admin.product_name')</th>
+                                    <th>@lang('admin.status')</th>
+                                    <th>@lang('admin.price')</th>
+                                    <th>@lang('admin.action')</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -49,15 +49,15 @@
                                             <td>
                                                 <a class="btn btn-info btn-sm mr-2" href="{{ route('admin.order-products.create', $order->id) }}">
                                                     <i class="fas fa-plus"></i>
-                                                    Add
+                                                    @lang('admin.add')
                                                 </a>
                                                 <a class="btn btn-warning btn-sm mr-2" href="{{ route('admin.order-products.edit', $order->id) }}">
                                                     <i class="fas fa-backward"></i>
-                                                    Refund
+                                                    @lang('admin.refund')
                                                 </a>
-                                                <a class="btn btn-danger btn-sm" href="{{ route('admin.order-products.checkout', $order->id) }}" onclick="confirm('Are you sure for checkout?')">
+                                                <a class="btn btn-danger btn-sm" href="{{ route('admin.order-products.checkout', $order->id) }}">
                                                     <i class="fas fa-lock"></i>
-                                                    Checkout
+                                                    @lang('admin.checkout')
                                                 </a>
                                             </td>
                                         </tr>

@@ -8,9 +8,9 @@
 
     <div class="card-body">
         <div class="form-group">
-            <label for="name">Table</label>
+            <label for="name">@lang('admin.table')</label>
             <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                   placeholder="Enter table name"
+                   placeholder="@lang('admin.enter_table_name')"
                    value="{{ old('name', $table->name ?? '') }}">
             @error('name')
                 <span class="error invalid-feedback">{{ $message }}</span>
@@ -22,14 +22,14 @@
                 <input type="checkbox" name="status" class="custom-control-input" id="status" value="1"
                     {{ old('status') || (isset($table->status) && $table->status) ? 'checked' : '' }}
                 >
-                <label class="custom-control-label" for="status">Status (Show/Hide) table</label>
+                <label class="custom-control-label" for="status">@lang('admin.status_show_hide')</label>
             </div>
         </div>
 
         <div class="col-sm-6">
             <!-- select -->
             <div class="form-group">
-                <label>Hall group</label>
+                <label>@lang('admin.hall_group')</label>
                 <select class="form-control" name="hall_group_id">
                     @foreach ($hallGroups as $hallGroup)
                         <option value="{{ $hallGroup->id }}"
@@ -42,6 +42,6 @@
 
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">@lang('admin.save')</button>
     </div>
 </form>

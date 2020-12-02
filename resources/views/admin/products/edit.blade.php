@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Product edit</h1>
+                    <h1>@lang('admin.edit_product')</h1>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <script>
             $(function () {
                 $('#image-delete').click(function () {
-                    if (!confirm('Remove image?')) return;
+                    if (!confirm('{{ __('admin.remove_image_q') }}')) return;
 
                     $.ajax({
                         headers: {
@@ -43,7 +43,7 @@
                     }).done(function (data) {
                         $('#image').remove();
                     }).fail(function (data) {
-                        alert('Error to remove image, please try again after reload page!')
+                        alert('{{ __('admin.alert_delete_product_img') }}')
                     });
                 });
             });

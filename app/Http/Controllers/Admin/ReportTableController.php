@@ -46,6 +46,6 @@ class ReportTableController extends Controller
             });
         }
 
-        return redirect()->route('admin.home')->with('success', 'Checkout successfully withdrawn.');
+        return redirect()->route('admin.home')->with('success', trans('admin.checkout_withdrawn'));
     }
 }

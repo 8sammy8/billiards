@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Tables</h1>
+                    <h1>@lang('admin.tables')</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -22,7 +22,7 @@
                                 <a href="{{ route('admin.tables.create') }}">
                                     <button type="button" class="btn btn-block btn-primary btn-sm">
                                         <i class="fas fa-plus"></i>
-                                        Create
+                                        @lang('admin.create')
                                     </button>
                                 </a>
                             </h3>
@@ -32,11 +32,11 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Hall group</th>
-                                    <th>Actions</th>
+                                    <th>@lang('admin.id')</th>
+                                    <th>@lang('admin.name')</th>
+                                    <th>@lang('admin.status')</th>
+                                    <th>@lang('admin.hall_group')</th>
+                                    <th>@lang('admin.action')</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,13 +50,13 @@
                                             <a class="btn btn-info btn-sm" href="{{ route('admin.tables.edit', $table) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
-                                                Edit
+                                                @lang('admin.edit')
                                             </a>
                                             <a class="btn btn-danger btn-sm" href="{{ route('admin.tables.destroy', $table) }}"
                                                onclick="event.preventDefault(); document.getElementById('delete-form{{ $table->id }}').submit();">
                                                 <i class="fas fa-trash">
                                                 </i>
-                                                Delete
+                                                @lang('admin.delete')
                                             </a>
                                             <form id="delete-form{{ $table->id }}" action="{{ route('admin.tables.destroy', $table) }}" method="POST">
                                                 @csrf

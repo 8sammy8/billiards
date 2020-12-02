@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Billiards | {{ env('APP_NAME') }}</title>
+    <title>{{ env('APP_NAME') }}</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('vendor/admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -30,7 +30,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.home') }}" class="nav-link">Dashboard</a>
+                <a href="{{ route('admin.home') }}" class="nav-link">{{ __('admin.dashboard') }}</a>
             </li>
         </ul>
 
@@ -63,7 +63,7 @@
 {{--            <p>Sidebar content</p>--}}
             <h5>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+                {{ __('admin.logout') }}
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

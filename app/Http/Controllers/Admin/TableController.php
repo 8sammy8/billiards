@@ -48,7 +48,7 @@ class TableController extends Controller
     {
         $this->fill($request, $table)->save();
 
-        return redirect()->route('admin.tables.index')->with('success', 'Table created');
+        return redirect()->route('admin.tables.index')->with('success', trans('admin.table_created'));
     }
 
     /**
@@ -75,7 +75,7 @@ class TableController extends Controller
     {
         $this->fill($request, $table)->update();
 
-        return redirect()->route('admin.tables.index')->with('success', 'Table updated');
+        return redirect()->route('admin.tables.index')->with('success', trans('admin.table_updated'));
     }
 
     /**
@@ -89,7 +89,7 @@ class TableController extends Controller
     {
         $table->delete();
 
-        return redirect()->route('admin.tables.index')->with('success', 'Table deleted');
+        return redirect()->route('admin.tables.index')->with('success', trans('admin.table_deleted'));
     }
 
     /**

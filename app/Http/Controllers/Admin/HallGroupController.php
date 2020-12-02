@@ -38,7 +38,7 @@ class HallGroupController extends Controller
         $hallGroup->fill($request->all());
         $hallGroup->save();
 
-        return redirect()->route('admin.hall-groups.index')->with('success', 'Hall group created');
+        return redirect()->route('admin.hall-groups.index')->with('success', trans('admin.hall_group_created'));
     }
 
     /**
@@ -63,7 +63,7 @@ class HallGroupController extends Controller
     {
         $hallGroup->update($request->all());
 
-        return redirect()->route('admin.hall-groups.index')->with('success', 'Hall group updated');
+        return redirect()->route('admin.hall-groups.index')->with('success', trans('admin.hall_group_updated'));
     }
 
     /**
@@ -77,6 +77,6 @@ class HallGroupController extends Controller
     {
         $hallGroup->delete();
 
-        return redirect()->route('admin.hall-groups.index')->with('success', 'Hall group deleted');
+        return redirect()->route('admin.hall-groups.index')->with('success', trans('admin.hall_group_deleted'));
     }
 }

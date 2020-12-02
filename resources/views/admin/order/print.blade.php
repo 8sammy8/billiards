@@ -3,7 +3,6 @@
 /* @var App\Domain\Orders\Models\Order $order */
 ?>
 @section('content')
-{{--    @dump($order)--}}
 <table>
     @if ($order->orderTable)
         <tr>
@@ -11,28 +10,28 @@
         </tr>
     @endif
         <tr>
-            <td>*********** {{ env('APP_NAME', 'Billiards') }} *************</td>
+            <td>***** {{ env('APP_NAME', 'Billiards') }} *****</td>
         </tr>
         <tr>
-            <td> Счет № {{ $order->id }}</td> <td> {{ $order->table->name ?? "" }}</td>
+            <td> {{ config('settings.print.bill') }} № {{ $order->id }}</td> <td> {{ $order->table->name ?? "" }}</td>
         </tr>
     @if ($order->orderTable)
         <tr>
-            <td>Стоимость 1 час игры: </td><td> {{ money($order->orderTable->rate->price) }}</td>
+            <td>{{ config('settings.print.cost_1_hour') }}: </td><td> {{ money($order->orderTable->rate->price) }}</td>
         </tr>
         <tr>
-            <td>Время начало игры: </td><td> {{ $order->orderTable->start_at->format('H:i') }}</td>
+            <td>{{ config('settings.print.game_start_time') }}: </td><td> {{ $order->orderTable->start_at->format('H:i') }}</td>
         </tr>
         <tr>
-            <td>Окончание времени: </td><td> {{ $order->orderTable->end_at->format('H:i') }}</td>
+            <td>{{ config('settings.print.game_end_time') }}:</td><td> {{ $order->orderTable->end_at->format('H:i') }}</td>
         </tr>
     @endif
 
     <tr>
-        <td>*****************   Бар   *****************</td>
+        <td>*****   {{ config('settings.print.bar') }}   *****</td>
     </tr>
     <tr>
-        <td>Наименование: </td><td> Сумма</td>
+        <td>{{ config('settings.print.name') }} : </td><td> {{ config('settings.print.amount') }}</td>
     </tr>
     @if ($order->orderProducts->isNotEmpty())
         @foreach($order->orderProducts as $orderProduct)
@@ -43,22 +42,22 @@
         @endforeach
     @endif
     <tr>
-        <td>*****************  Итого  *****************</td>
+        <td>*****  {{ config('settings.print.total') }}  *****</td>
     </tr>
     <tr>
-        <td>Сумма по бару: </td><td> {{ money($order->orderProducts->sum('amount')) }}</td>
+        <td>{{ config('settings.print.bar_amount') }}: </td><td> {{ money($order->orderProducts->sum('amount')) }}</td>
     </tr>
     @if ($order->orderTable)
         <tr>
-            <td>Сумма по бильярду: </td><td> {{ money($order->orderTable->amount) }}</td>
+            <td>{{ config('settings.print.billiards_amount') }} : </td><td> {{ money($order->orderTable->amount) }}</td>
         </tr>
     @endif
     @if ($order->orderTable)
     <tr>
-        <td>Сумма к оплате: </td><td> {{ money($order->orderProducts->sum('amount') + $order->orderTable->amount) }}</td>
+        <td>{{ config('settings.print.total_amount') }}: </td><td> {{ money($order->orderProducts->sum('amount') + $order->orderTable->amount) }}</td>
     @else
         <tr>
-            <td>Сумма к оплате: </td><td> {{ money($order->orderProducts->sum('amount')) }}</td>
+            <td>{{ config('settings.print.total_amount') }}:</td><td> {{ money($order->orderProducts->sum('amount')) }}</td>
     @endif
 
     </tr>
@@ -70,6 +69,7 @@
     <style>
         table {
             font-family: sans-serif;
+            font-size: 12px;
         }
     </style>
 @endpush

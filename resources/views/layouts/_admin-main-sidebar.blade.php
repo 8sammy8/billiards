@@ -21,67 +21,67 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-header"><i class="nav-icon fas fa-folder-open"></i> ORDERS</li>
+                <li class="nav-header"><i class="nav-icon fas fa-folder-open"></i> @lang('admin.orders')</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.order-tables.index') }}" class="nav-link @if(Route::is('admin.order-tables*')) active @endif">
                         <i class="fas fa-table nav-icon"></i>
-                        <p>Order tables</p>
+                        <p>@lang('admin.order_tables')</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.order-products.index') }}" class="nav-link @if(Route::is('admin.order-products*')) active @endif">
                         <i class="fas fa-glass-martini nav-icon"></i>
-                        <p>Order products</p>
+                        <p>@lang('admin.order_products')</p>
                     </a>
                 </li>
 
-                <li class="nav-header"><i class="nav-icon fas fa-boxes"></i> PRODUCTS</li>
+                <li class="nav-header"><i class="nav-icon fas fa-boxes"></i> @lang('admin.products')</li>
                 <li class="nav-item">
                     <a href="{{ route('admin.categories.index') }}" class="nav-link @if(Route::is('admin.categories*')) active @endif">
                         <i class="fas fa-box nav-icon"></i>
-                        <p>Categories</p>
+                        <p>@lang('admin.categories')</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.products.index') }}" class="nav-link @if(Route::is('admin.products*')) active @endif">
                         <i class="fas fa-archive nav-icon"></i>
-                        <p>Products</p>
+                        <p>@lang('admin.products')</p>
                     </a>
                 </li>
 
-                <li class="nav-header"><i class="nav-icon fas fa-reply"></i> ORDERS REPORTS</li>
+                <li class="nav-header"><i class="nav-icon fas fa-reply"></i> @lang('admin.reports') </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.reports-table.index') }}" class="nav-link @if(Route::is('admin.reports-table.*')) active @endif">
                         <i class="fas fa-table nav-icon"></i>
-                        <p>Table reports</p>
+                        <p>@lang('admin.table_reports')</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.reports-product.index') }}" class="nav-link @if(Route::is('admin.reports-product*')) active @endif">
                         <i class="fas fa-glass-martini nav-icon"></i>
-                        <p>Product reports</p>
+                        <p>@lang('admin.product_reports')</p>
                     </a>
                 </li>
 
                 @if (auth()->user()->isAdmin())
 
-                <li class="nav-header"><i class="nav-icon fas fa-cog"></i>  SETTINGS</li>
+                <li class="nav-header"><i class="nav-icon fas fa-cog"></i> @lang('admin.settings') </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.hall-groups.index') }}" class="nav-link @if(Route::is('admin.hall-groups*')) active @endif">
                         <i class="far fa-map nav-icon"></i>
-                        <p>Hall Groups</p>
+                        <p>@lang('admin.hall_groups')</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.tables.index') }}" class="nav-link @if(Route::is('admin.tables*')) active @endif">
                         <i class="fas fa-table nav-icon"></i>
-                        <p>Tables</p>
+                        <p>@lang('admin.tables')</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.rates.index') }}" class="nav-link @if(Route::is('admin.rates*')) active @endif">
                         <i class="fas fa-percentage nav-icon"></i>
-                        <p>Rates</p>
+                        <p>@lang('admin.rates')</p>
                     </a>
                 </li>
                 @endif

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Invoice: {{ $table->name }} </h1>
+                    <h1>@lang('admin.invoice_information'): {{ $table->name }} </h1>
                 </div>
             </div>
         </div>
@@ -25,15 +25,15 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Time limit: <span class="text-danger">
-                                    {{ \Table::getTimeLimit($order) ?? "No" }}</span>
+                            <h3 class="card-title">@lang('admin.time_limit'): <span class="text-danger">
+                                    {{ \Table::getTimeLimit($order) ?? trans('admin.no') }}</span>
                             </h3>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Time over lead:
+                            <h3 class="card-title">@lang('admin.time_over_lead'):
                                 <span class="text-danger" id="left-time"> </span>
                             </h3>
                         </div>
@@ -47,7 +47,7 @@
                             <div class="col-12">
                                 <button type="button" class="btn btn-danger float-right" id="checkout"
                                         data-url="{{ route('admin.order-tables.checkout', $order->id) }}">
-                                    <i class="far fa-credit-card"></i> Checkout
+                                    <i class="far fa-credit-card"></i> @lang('admin.checkout')
                                 </button>
                             </div>
                         </div>
@@ -55,8 +55,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </section>
 @endsection
@@ -145,7 +143,7 @@
 
                 function showTimeIsOutAlert(table_name) {
                     window.setInterval(function () {
-                        toastr.error('Time is out ' + table_name + '!')
+                        toastr.error('{{ __('admin.time_is_out') }}' + table_name + '!')
                     }, 15000);
                 }
 

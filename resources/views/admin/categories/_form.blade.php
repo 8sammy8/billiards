@@ -8,9 +8,9 @@
 
     <div class="card-body">
         <div class="form-group">
-            <label for="name">Category</label>
+            <label for="name">@lang('admin.category')</label>
             <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                   placeholder="Enter category name"
+                   placeholder="@lang('admin.enter_category_name')"
                    value="{{ old('name', $category->name ?? '') }}">
             @error('name')
                 <span class="error invalid-feedback">{{ $message }}</span>
@@ -22,12 +22,12 @@
                 <input type="checkbox" name="status" class="custom-control-input" id="status" value="1"
                     {{ old('status') || (isset($category->status) && $category->status) ? 'checked' : '' }}
                 >
-                <label class="custom-control-label" for="status">Status (Block/Active) category</label>
+                <label class="custom-control-label" for="status">@lang('admin.status_show_hide')</label>
             </div>
         </div>
 
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">@lang('admin.save')</button>
     </div>
 </form>

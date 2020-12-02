@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Run time for table: {{ $table->name }} </h1>
+                    <h1>@lang('admin.run_time_for_table'): {{ $table->name }} </h1>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 
                                     <div class="col-sm-8">
                                         <div class="form-group">
-                                            <label>Select rate</label>
+                                            <label>@lang('admin.rate')</label>
                                             <select class="form-control @error('rate_id') is-invalid @enderror" name="rate_id">
                                                 @foreach($rates as $rate)
                                                     @if($rate)
@@ -64,7 +64,7 @@
                                                     <div class="col-lg-5">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text">Hour</span>
+                                                                <span class="input-group-text">@lang('admin.hours')</span>
                                                             </div>
                                                             <input type="number" name="limit_hour" id="limit_hour" class="form-control
                                                                    @error('limit_hour') is-invalid @enderror"
@@ -77,7 +77,7 @@
                                                     <div class="col-lg-5">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text">Min</span>
+                                                                <span class="input-group-text">@lang('admin.minutes')</span>
                                                             </div>
                                                             <input type="number" name="limit_min" id="limit_min" class="form-control
                                                                    @error('limit_min') is-invalid @enderror"
@@ -100,7 +100,7 @@
                                                     <div class="col-lg-8">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text">Price</span>
+                                                                <span class="input-group-text">@lang('admin.price')</span>
                                                             </div>
                                                             <input type="number" name="limit_price" id="limit_price" class="form-control
                                                                     @error('limit_price') is-invalid @enderror"
@@ -118,7 +118,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success">Start</button>
+                                <button type="submit" class="btn btn-success">@lang('admin.start')</button>
                             </div>
 
                         </form>

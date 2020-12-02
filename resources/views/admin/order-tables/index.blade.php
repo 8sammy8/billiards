@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>All tables</h1>
+                    <h1>@lang('admin.order_tables')</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -91,7 +91,7 @@
                 function showTimeIsOutAlert(table_name)
                 {
                     window.setInterval(function () {
-                        toastr.error('Time is out ' + table_name + '!')
+                        toastr.error('{{ __('admin.time_is_out') }} ' + table_name + '!')
                     }, 15000);
                 }
 

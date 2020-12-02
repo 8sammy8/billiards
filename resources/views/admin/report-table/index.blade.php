@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Table reports</h1>
+                    <h1>@lang('admin.table_reports')</h1>
                 </div>
             </div>
         </div>
@@ -32,17 +32,17 @@
                                                role="grid" aria-describedby="example1_info">
                                             <thead>
                                                 <tr role="row">
-                                                    <th>Date</th>
-                                                    <th>Order Id</th>
-                                                    <th>Table name</th>
-                                                    <th width="15%">Products</th>
-                                                    <th>Start time</th>
-                                                    <th>End time</th>
-                                                    <th>During time</th>
-                                                    <th>Table price</th>
-                                                    <th>Products price</th>
-                                                    <th>Total price</th>
-                                                    <th>Actions</th>
+                                                    <th>@lang('admin.date')</th>
+                                                    <th>@lang('admin.order_id')</th>
+                                                    <th>@lang('admin.table_name')</th>
+                                                    <th width="15%">@lang('admin.products')</th>
+                                                    <th>@lang('admin.start_time')</th>
+                                                    <th>@lang('admin.end_time')</th>
+                                                    <th>@lang('admin.during_time')</th>
+                                                    <th>@lang('admin.table_price')</th>
+                                                    <th>@lang('admin.products_price')</th>
+                                                    <th>@lang('admin.total_price')</th>
+                                                    <th>@lang('admin.action')</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -55,13 +55,13 @@
                                                     <td>{{ $order->orderTable->start_at->format('H:i') }}</td>
                                                     <td>{{ $order->orderTable->end_at->format('H:i') }}</td>
                                                     <td>{{ \Table::getTimeLimit($order) }}</td>
-                                                    <td>{{ $order->orderTable->amount }}</td>
-                                                    <td>{{ $order->orderProducts ? $order->orderProducts->sum('amount') :'' }}</td>
+                                                    <td>{{ money($order->orderTable->amount, ' ') }}</td>
+                                                    <td>{{ money($order->orderProducts ? $order->orderProducts->sum('amount') :'', ' ') }}</td>
                                                     <td>{{ money($order->total_amount) }}</td>
                                                     <td>
                                                         <a class="btn btn-warning btn-sm" href="{{ route('admin.order.print', $order->id) }}" target="_blank">
                                                             <i class="fas fa-print"></i>
-                                                            Print
+                                                            @lang('admin.print')
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -81,7 +81,7 @@
                 <div class="col-6">
                     <div class="table-responsive">
                         <table class="table">
-                                <th>Total: {{ money($operatorOrders->sum('total_amount')) }}</th>
+                                <th>@lang('admin.total'): {{ money($operatorOrders->sum('total_amount')) }}</th>
                             </tr>
                         </table>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="col-12">
                         <a href="{{ route('admin.reports-table.pass', $operatorOrders->first()->user_id) }}">
                             <button type="button" class="btn btn-danger float-left">
-                                <i class="far fa-credit-card"></i> Pass of
+                                <i class="far fa-credit-card"></i> @lang('admin.pass_of')
                             </button>
                         </a>
                     </div>

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create Hall Group</h1>
+                    <h1>@lang('admin.create_hall_group')</h1>
                 </div>
             </div>
         </div>

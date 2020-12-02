@@ -1,17 +1,17 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Bar</h3>
+        <h3 class="card-title">@lang('admin.order_products')</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
         <table class="table table-bordered text-center">
             <thead>
             <tr>
-                <th>Product name</th>
-                <th>Quantity</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Action</th>
+                <th>@lang('admin.product_name')</th>
+                <th>@lang('admin.quantity')</th>
+                <th>@lang('admin.image')</th>
+                <th>@lang('admin.price')</th>
+                <th>@lang('admin.action')</th>
             </tr>
             </thead>
             <tbody>
@@ -23,10 +23,10 @@
                     <td>{{ money($orderProduct->amount) }}</td>
                     <td>
                         <a href="{{ route('admin.order-products.refund', $orderProduct->id) }}"
-                           onclick="confirm('Are you sure to refund the product?')">
+                           onclick="if(!confirm('{{ trans('admin.sure_to_refund_product') }}')){ return false;}">
                             <button class="btn btn-warning btn-sm">
                                 <i class="fas fa-backward"></i>
-                                Refund
+                                @lang('admin.refund')
                             </button>
                         </a>
                     </td>
@@ -37,7 +37,7 @@
     </div>
     <div class="card-footer">
         <a href="{{ route('admin.order-products.create', $order->id) }}">
-            <button type="submit" class="btn btn-success">+ product</button>
+            <button type="submit" class="btn btn-success">+ @lang('admin.product')</button>
         </a>
     </div>
 </div>

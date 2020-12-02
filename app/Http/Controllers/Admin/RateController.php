@@ -32,7 +32,7 @@ class RateController extends Controller
         $hallGroups = HallGroup::all();
         if($hallGroups->isEmpty()) {
             return redirect()->route('admin.hall-groups.create')
-                ->with('info', 'Please, First create Hall group');
+                ->with('info', trans('admin.first_create_hall_group'));
         }
 
         return view('admin.rates.create', compact('hallGroups'));
@@ -50,7 +50,7 @@ class RateController extends Controller
         $rate->fill($request->all());
         $rate->save();
 
-        return redirect()->route('admin.rates.index')->with('success', 'Rate created');
+        return redirect()->route('admin.rates.index')->with('success', trans('admin.rate_created'));
     }
 
     /**
@@ -65,7 +65,7 @@ class RateController extends Controller
         $canChange = $rateService->canChange($rate);
         if(!$canChange) {
             return redirect()->route('admin.rates.index')
-                ->with('error', 'Can not change rate is busy now!');
+                ->with('error', trans('admin.rate_can_not_update'));
         }
         $hallGroups = HallGroup::all();
 
@@ -85,12 +85,12 @@ class RateController extends Controller
         $canChange = $rateService->canChange($rate);
         if(!$canChange) {
             return redirect()->route('admin.rates.index')
-                ->with('error', 'Can not change rate is busy now!');
+                ->with('error', trans('admin.rate_can_not_update'));
         }
 
         $rate->update($request->all());
 
-        return redirect()->route('admin.rates.index')->with('success', 'Rate updated');
+        return redirect()->route('admin.rates.index')->with('success', trans('admin.rate_updated'));
     }
 
     /**
@@ -106,11 +106,11 @@ class RateController extends Controller
         $canChange = $rateService->canChange($rate);
         if(!$canChange) {
             return redirect()->route('admin.rates.index')
-                ->with('error', 'Can not delete rate is busy now!');
+                ->with('error', trans('admin.rate_can_not_delete'));
         }
 
         $rate->delete();
 
-        return redirect()->route('admin.rates.index')->with('success', 'Rate deleted');
+        return redirect()->route('admin.rates.index')->with('success', trans('admin.rate_deleted'));
     }
 }
